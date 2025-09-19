@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Media Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Text to Media Generator</h1>
+    <form action="/generate" method="post">
+        <label for="prompt">Enter your prompts (one per line):</label><br>
+        <textarea id="prompt" name="prompt" rows="8" cols="50"></textarea><br>
+
+        <label for="style">Select a style:</label><br>
+        <select id="style" name="style">
+            <option value="no-style">No Style</option>
+            <option value="anime">Anime</option>
+            <option value="photographic">Photographic</option>
+            <option value="digital-art">Digital Art</option>
+            <option value="comic-book">Comic Book</option>
+        </select><br><br>
+
+        <input type="submit" value="Generate">
+    </form>
+    <div id="result">
+        {% if image_urls %}
+            {% for image_url in image_urls %}
+                <img src="{{ image_url }}" alt="Generated Image">
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
